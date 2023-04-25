@@ -127,18 +127,18 @@ class TestSynapseBaseClient:
             )
             mock_handle.assert_called_once_with(response=req_response)
 
-    def test_get_custom_endpoint(self, client_setup, test_data):
+    @patch.object(requests.Session, "get")
+    @patch.object(client, "_handle_response")
+    def test_get_custom_endpoint(
+        self, mock_handle, mock_req_get, client_setup, test_data
+    ):
         auth_token, tc = client_setup
         req_response, path, headers, stub_response, params = test_data
         endpoint = "https://repo-dev.dev.sagebase.org/repo/v1"
+        mock_req_get.return_value = req_response
+        mock_handle.return_value = stub_response
 
-        with patch.object(
-            requests.Session, "get", return_value=req_response
-        ) as mock_req_get, patch.object(
-            client, "_handle_response", return_value=stub_response
-        ) as mock_handle, patch.object(
-            req_response, "json", return_value={}
-        ):
+        with patch.object(req_response, "json", return_value={}):
             assert (
                 tc.rest_get(path, server_url=endpoint, query_parameters=params)
                 == stub_response
