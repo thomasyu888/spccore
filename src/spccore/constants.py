@@ -4,7 +4,7 @@ import os
 
 import requests  # type: ignore
 
-from synapse import __version__
+from spccore import __version__
 
 
 # Generic constants
