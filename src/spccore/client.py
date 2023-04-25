@@ -78,7 +78,7 @@ class SynapseClient(ABC):
             sess.headers.update({"Authorization": f"Bearer {self.auth_token}"})
         return sess
 
-    def get(
+    def rest_get(
         self,
         endpoint_path: str,
         server_url: Optional[str] = None,
@@ -109,7 +109,7 @@ class SynapseClient(ABC):
         # TODO: Add logger debug to print resp
         return _handle_response(response=resp)
 
-    def put(
+    def rest_put(
         self,
         endpoint_path: str,
         server_url: Optional[str] = None,
@@ -144,7 +144,7 @@ class SynapseClient(ABC):
         # TODO: Add logger debug to print resp
         return _handle_response(response=resp)
 
-    def post(
+    def rest_post(
         self,
         endpoint_path: str,
         server_url: Optional[str] = None,
@@ -179,7 +179,7 @@ class SynapseClient(ABC):
         # TODO: Add logger debug to print resp
         return _handle_response(response=resp)
 
-    def delete(
+    def rest_delete(
         self,
         endpoint_path: str,
         server_url: Optional[str] = None,

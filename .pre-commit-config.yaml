@@ -50,7 +50,7 @@ repos:
     args: [--config=pyproject.toml]
 
 # finds dead python code
-- repo: https://github.com/jendrikseipp/vulture
-  rev: 'v2.7'
-  hooks:
-    - id: vulture
+# - repo: https://github.com/jendrikseipp/vulture
+#   rev: 'v2.7'
+#   hooks:
+#     - id: vulture

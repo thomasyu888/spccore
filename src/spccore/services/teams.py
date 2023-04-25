@@ -12,7 +12,7 @@ class TeamsService(SynapseClient):
 
     def get_teams(self) -> Union[dict, str]:
         """Get teams"""
-        return self.get(endpoint_path="/teams")
+        return self.rest_get(endpoint_path="/teams")
 
     def get_team(self, team_id: Union[str, int]) -> Union[dict, str]:
         """Get Synapse Team metadata
@@ -23,4 +23,4 @@ class TeamsService(SynapseClient):
         Returns:
             dict: Synapse team metadata
         """
-        return self.get(endpoint_path=f"/team/{team_id}")
+        return self.rest_get(endpoint_path=f"/team/{team_id}")
