@@ -4,7 +4,7 @@ https://rest-docs.synapse.org/rest/#org.sagebionetworks.repo.web.controller.Team
 """
 from typing import Union
 
-from synapse.client import SynapseClient
+from spccore.client import SynapseClient
 
 
 class TeamsService(SynapseClient):

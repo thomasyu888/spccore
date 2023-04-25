@@ -4,17 +4,17 @@ from unittest.mock import patch, Mock
 import pytest
 import requests  # type: ignore
 
-from synapse import client
-from synapse.exceptions import (
+from spccore import client
+from spccore.exceptions import (
     SynapseBadRequestError,
 )
-from synapse.constants import (
+from spccore.constants import (
     CONTENT_TYPE_HEADER,
     JSON_CONTENT_TYPE,
     SYNAPSE_USER_AGENT_HEADER,
     SYNAPSE_DEFAULT_REPO_ENDPOINT,
 )
-from synapse.client import _handle_response, _generate_request_url, SynapseClient
+from spccore.client import _handle_response, _generate_request_url, SynapseClient
 
 
 def test__handle_response_error():

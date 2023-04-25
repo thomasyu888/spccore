@@ -1,4 +1,4 @@
-## py-synapse
+## spccore
 
 The Core of the Synapse Python client
 

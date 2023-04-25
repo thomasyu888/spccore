@@ -5,14 +5,14 @@ import urllib.parse as urllib_parse
 
 import requests  # type: ignore
 
-from synapse.constants import (
+from spccore.constants import (
     # SYNAPSE_DEFAULT_FILE_ENDPOINT,
     SYNAPSE_DEFAULT_REPO_ENDPOINT,
     CONTENT_TYPE_HEADER,
     JSON_CONTENT_TYPE,
     SYNAPSE_USER_AGENT_HEADER,
 )
-from synapse.exceptions import check_status_code_and_raise_error
+from spccore.exceptions import check_status_code_and_raise_error
 
 
 def _generate_request_url(server_url: str, endpoint_path: str) -> str:
