@@ -109,18 +109,17 @@ class TestSynapseBaseClient:
         return req_response, path, headers, stub_response, params
 
     # get
-
-    def test_get_use_default_endpoint(self, client_setup, test_data):
+    @patch.object(requests.Session, "get")
+    @patch.object(client, "_handle_response")
+    def test_get_use_default_endpoint(
+        self, mock_handle, mock_req_get, client_setup, test_data
+    ):
         auth_token, tc = client_setup
         req_response, path, headers, stub_response, params = test_data
+        mock_req_get.return_value = req_response
+        mock_handle.return_value = stub_response
 
-        with patch.object(
-            requests.Session, "get", return_value=req_response
-        ) as mock_req_get, patch.object(
-            client, "_handle_response", return_value=stub_response
-        ) as mock_handle, patch.object(
-            req_response, "json", return_value={}
-        ):
+        with patch.object(req_response, "json", return_value={}):
             assert tc.rest_get(path, query_parameters=params) == stub_response
             mock_req_get.assert_called_once_with(
                 SYNAPSE_DEFAULT_REPO_ENDPOINT + path, params=params
