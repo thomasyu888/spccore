@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+synapse = {editable = true, path = ".", extras = ["all"]}
+pre-commit = "*"
+types-requests = "*"
+mypy = "*"
+ipython = "*"
+
+[dev-packages]
+synapse = {editable = true, path = ".", extras = ["testing", "dev"]}
+
+[requires]
+python_version = "3.10"
