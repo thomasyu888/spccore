@@ -58,7 +58,7 @@ def _handle_response(response: requests.Response) -> Union[dict, str]:
         return response.text
 
 
-class SynapseClient(ABC):
+class SynapseBaseClient(ABC):
     """ABC meta class"""
 
     def __init__(self, auth_token: Optional[str] = None, profile: Optional[str] = None):
@@ -209,3 +209,19 @@ class SynapseClient(ABC):
         resp = self.session.delete(url, params=query_parameters, **kwargs)
         # TODO: Add logger debug to print resp
         return _handle_response(response=resp)
+
+
+class SynapseClient(SynapseBaseClient):
+    """_summary_
+
+    Args:
+        SynapseBaseClient (_type_): _description_
+    """
+
+    def get(self, synapse_model):
+        """_summary_
+
+        Args:
+            synapse_model (_type_): _description_
+        """
+        pass

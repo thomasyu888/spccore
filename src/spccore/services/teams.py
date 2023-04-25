@@ -4,10 +4,10 @@ https://rest-docs.synapse.org/rest/#org.sagebionetworks.repo.web.controller.Team
 """
 from typing import Union
 
-from spccore.client import SynapseClient
+from spccore.client import SynapseBaseClient
 
 
-class TeamsService(SynapseClient):
+class TeamsService(SynapseBaseClient):
     """Synapse Team services"""
 
     def get_teams(self) -> Union[dict, str]:

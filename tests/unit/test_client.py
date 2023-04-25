@@ -14,7 +14,7 @@ from spccore.constants import (
     SYNAPSE_USER_AGENT_HEADER,
     SYNAPSE_DEFAULT_REPO_ENDPOINT,
 )
-from spccore.client import _handle_response, _generate_request_url, SynapseClient
+from spccore.client import _handle_response, _generate_request_url, SynapseBaseClient
 
 
 def test__handle_response_error():
@@ -93,7 +93,7 @@ class TestSynapseBaseClient:
 
     @pytest.fixture
     def client_setup(self):
-        class TestClient(SynapseClient):
+        class TestClient(SynapseBaseClient):
             pass
 
         auth_token = "I am a test token"
@@ -121,7 +121,7 @@ class TestSynapseBaseClient:
         ) as mock_handle, patch.object(
             req_response, "json", return_value={}
         ):
-            assert tc.get(path, query_parameters=params) == stub_response
+            assert tc.rest_get(path, query_parameters=params) == stub_response
             mock_req_get.assert_called_once_with(
                 SYNAPSE_DEFAULT_REPO_ENDPOINT + path, params=params
             )
@@ -140,7 +140,7 @@ class TestSynapseBaseClient:
             req_response, "json", return_value={}
         ):
             assert (
-                tc.get(path, server_url=endpoint, query_parameters=params)
+                tc.rest_get(path, server_url=endpoint, query_parameters=params)
                 == stub_response
             )
             mock_req_get.assert_called_once_with(endpoint + path, params=params)
@@ -159,7 +159,7 @@ class TestSynapseBaseClient:
         mock_handle.return_value = body
 
         with patch.object(req_response, "json", return_value={}):
-            assert tc.get(path, query_parameters=params, data=body) == body
+            assert tc.rest_get(path, query_parameters=params, data=body) == body
             mock_req_get.assert_called_once_with(
                 SYNAPSE_DEFAULT_REPO_ENDPOINT + path, params=params, data=body
             )
